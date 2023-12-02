@@ -8,7 +8,7 @@ Game::Game(int height, int width, string title)
 
 	_player = new Player();
 	_enemiesAmount = 5;
-	_enemies = new Enemy[_enemiesAmount];
+	_enemies = new Objective[_enemiesAmount];
 
 	SetScene();
 }

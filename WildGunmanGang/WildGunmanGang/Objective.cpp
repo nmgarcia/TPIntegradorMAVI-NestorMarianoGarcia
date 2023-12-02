@@ -1,7 +1,7 @@
-#include "Enemy.h"
+#include "Objective.h"
 
 
-Enemy::Enemy()
+Objective::Objective()
 {
 	_enemyTexture.loadFromFile("Assets/enemy1.png");
 	_enemySprite.setTexture(_enemyTexture);
@@ -9,9 +9,12 @@ Enemy::Enemy()
 	_enemySprite.setOrigin(_enemyTexture.getSize().x / 2.0f, _enemyTexture.getSize().y / 2.0f);
 }
 
-void Enemy::Draw(RenderWindow* window)
+void Objective::Update()
 {
-	
+}
+
+void Objective::Draw(RenderWindow* window)
+{
 	_enemySprite.setPosition(175, 145);
 	window->draw(_enemySprite);
 
@@ -26,4 +29,20 @@ void Enemy::Draw(RenderWindow* window)
 
 	_enemySprite.setPosition(400, 450);
 	window->draw(_enemySprite);
+}
+
+bool Objective::IsActive() {
+	return _isActive;
+}
+
+bool Objective::IsAlive() {
+	return _isAlive;
+}
+
+void Objective::Activate() {
+	_isActive = true;
+}
+
+void Objective::SetAsNotAlive() {
+	_isAlive = false;
 }

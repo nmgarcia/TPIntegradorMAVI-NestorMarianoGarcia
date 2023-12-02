@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "Objective.h"
 
 class Game
 {
@@ -9,7 +9,7 @@ class Game
 	RenderWindow* _window;
 	Player* _player;
 	int _enemiesAmount;
-	Enemy* _enemies;
+	Objective* _enemies;
 
 	//Textures and sprites
 	Texture _backgroundTexture;
