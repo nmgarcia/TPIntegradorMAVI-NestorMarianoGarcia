@@ -2,14 +2,19 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Objective.h"
+#include "ObjectiveManager.h"
+#include "Data.h"
 
 class Game
 {
 	//Main attributes
 	RenderWindow* _window;
 	Player* _player;
-	int _enemiesAmount;
-	Objective* _enemies;
+	int _objectivesAmount;
+	Objective* _objectives;
+	ObjectiveManager _objectiveManager;
+	Clock _clock;
+	float _visibleTime;
 
 	//Textures and sprites
 	Texture _backgroundTexture;
@@ -18,6 +23,8 @@ class Game
 	Sprite _topSprite;
 	Texture _openWindowTexture;
 	Sprite _openWindowSprite;
+	Texture _closedWindowTexture;
+	Sprite _closedWindowSprite;
 
 	//Main structure
 	void ProcessEvents();
@@ -31,7 +38,7 @@ class Game
 	void Shoot();
 	
 	//Draw functions
-	void DrawEnemies();
+	void DrawObjectives();
 	void DrawWindows();
 
 	public:

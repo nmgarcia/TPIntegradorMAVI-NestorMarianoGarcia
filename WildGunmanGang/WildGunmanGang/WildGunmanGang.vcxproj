@@ -133,16 +133,19 @@
     <ClCompile Include="Objective.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ObjectivePool.cpp" />
+    <ClCompile Include="ObjectiveManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Enums.cpp" />
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Positions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objective.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="ObjectivePool.h" />
+    <ClInclude Include="ObjectiveManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Enums.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

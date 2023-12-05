@@ -2,9 +2,9 @@
 
 Player::Player()
 {
-	_crossTexture.loadFromFile("Assets/crosshair.png");
+	_crossTexture.loadFromFile(Data::assetsPath[Crosshair]);
 	_crossSprite.setTexture(_crossTexture);
-	_crossSprite.setScale(0.5f, 0.5f);
+	_crossSprite.setScale(0.3f, 0.3f);
 	_crossSprite.setOrigin(_crossTexture.getSize().x / 2.0f, _crossTexture.getSize().y / 2.0f);
 }
 

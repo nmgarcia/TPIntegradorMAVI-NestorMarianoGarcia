@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "Data.h";
 
 class Player{
 	Texture _crossTexture;

@@ -27,10 +27,16 @@
     <ClCompile Include="Objective.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Enums.cpp">
+    <ClCompile Include="Data.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectivePool.cpp">
+    <ClCompile Include="ObjectiveManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Positions.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,10 +53,13 @@
     <ClInclude Include="Objective.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Enums.h">
+    <ClInclude Include="Data.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectivePool.h">
+    <ClInclude Include="ObjectiveManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,25 +1,31 @@
 #pragma once
 #include "stdafx.h"
+#include "Data.h"
 
 class Objective{
 	
-	Texture _enemyTexture;
-	Sprite _enemySprite;
+	Texture _objectiveTexture;
+	Sprite _objectiveSprite;
 	Vector2i _position;
+	int _positionNumber;
 	bool _isInnocent;
 	bool _isActive;
-	bool _isAlive;
-
+	
 	public:
 		Objective();
+		Objective(int position);
+		void Initilize();
 		void Update();
 		void Draw(RenderWindow* window);
+		void SetSprite(Texture& texture);
+
+		bool IsInnocent();
+		void SetAsNoInnocent();
+		void SetAsInnocent();
 
 		bool IsActive();
-		void Activate();
+		void SetActive();
+		void SetInactive();
 		
-		bool IsAlive();
-		void SetAsNotAlive();
-
 };
 

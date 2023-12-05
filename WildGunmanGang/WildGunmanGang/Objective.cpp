@@ -1,48 +1,60 @@
 #include "Objective.h"
 
-
 Objective::Objective()
 {
-	_enemyTexture.loadFromFile("Assets/enemy1.png");
-	_enemySprite.setTexture(_enemyTexture);
-	_enemySprite.setScale(0.5f, 0.5f);
-	_enemySprite.setOrigin(_enemyTexture.getSize().x / 2.0f, _enemyTexture.getSize().y / 2.0f);
+	Initilize();
+}
+
+Objective::Objective(int position) {
+	Initilize();
+	_position = Data::ObjectivesPositions[position]._position;
+	_positionNumber = position;
+}
+
+void Objective::Initilize() {
+	_isActive = false;	
+	_objectiveTexture.loadFromFile(Data::assetsPath[Enemy1]);
+	SetSprite(_objectiveTexture);
 }
 
 void Objective::Update()
 {
+
 }
 
 void Objective::Draw(RenderWindow* window)
-{
-	_enemySprite.setPosition(175, 145);
-	window->draw(_enemySprite);
+{	
+	if(_isActive) {
+		_objectiveSprite.setPosition(_position.x, _position.y);
+		window->draw(_objectiveSprite);
+	}
+}
 
-	_enemySprite.setPosition(625, 145);
-	window->draw(_enemySprite);
+void Objective::SetSprite(Texture& texture) {
+	_objectiveSprite.setTexture(texture);
+	_objectiveSprite.setScale(0.6f, 0.6f);
+	_objectiveSprite.setOrigin(texture.getSize().x / 2.0f, texture.getSize().y / 2.0f);
+}
+bool Objective::IsInnocent(){
+	return _isInnocent;
+}
 
-	_enemySprite.setPosition(150, 418);
-	window->draw(_enemySprite);
+void Objective::SetAsInnocent() {
+	_isInnocent = true;
+}
 
-	_enemySprite.setPosition(650, 418);
-	window->draw(_enemySprite);
-
-	_enemySprite.setPosition(400, 450);
-	window->draw(_enemySprite);
+void Objective::SetAsNoInnocent() {
+	_isInnocent = false;
 }
 
 bool Objective::IsActive() {
 	return _isActive;
 }
 
-bool Objective::IsAlive() {
-	return _isAlive;
-}
-
-void Objective::Activate() {
+void Objective::SetActive() {
 	_isActive = true;
 }
 
-void Objective::SetAsNotAlive() {
-	_isAlive = false;
+void Objective::SetInactive() {
+	_isActive = false;
 }
