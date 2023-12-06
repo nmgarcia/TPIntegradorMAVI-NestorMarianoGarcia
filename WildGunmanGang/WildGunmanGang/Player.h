@@ -5,6 +5,7 @@
 class Player{
 	Texture _crossTexture;
 	Sprite _crossSprite;
+	
 
 	public: 
 		Player();

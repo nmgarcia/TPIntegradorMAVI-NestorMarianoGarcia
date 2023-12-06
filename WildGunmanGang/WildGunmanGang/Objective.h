@@ -17,7 +17,7 @@ class Objective{
 		void Initilize();
 		void Update();
 		void Draw(RenderWindow* window);
-		void SetSprite(Texture& texture);
+		void SetSprite();
 
 		bool IsInnocent();
 		void SetAsNoInnocent();

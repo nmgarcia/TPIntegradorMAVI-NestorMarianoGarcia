@@ -92,7 +92,7 @@ void Game::SetScene()
 
 	_topSprite.setScale(scaleX, scaleY);
 
-	_openWindowTexture.loadFromFile("Assets/openWindow.png");
+	_openWindowTexture.loadFromFile(Data::assetsPath[OpenWindow]);
 	_openWindowSprite.setTexture(_openWindowTexture);
 	_openWindowSprite.setScale(0.55f, 0.55f);
 	_openWindowSprite.setOrigin(_openWindowTexture.getSize().x / 2.0f, _openWindowTexture.getSize().y / 2.0f);
