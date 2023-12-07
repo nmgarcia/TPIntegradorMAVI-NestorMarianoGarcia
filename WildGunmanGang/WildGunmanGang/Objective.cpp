@@ -13,7 +13,7 @@ Objective::Objective(int position) {
 
 void Objective::Initilize() {
 	_isActive = false;	
-	_objectiveTexture.loadFromFile(Data::assetsPath[Enemy1]);
+	_objectiveTexture.loadFromFile(Data::AssetsPath[Enemy]);
 	SetSprite();
 }
 
@@ -31,9 +31,17 @@ void Objective::Draw(RenderWindow* window)
 }
 
 void Objective::SetSprite() {
-	_objectiveSprite.setTexture(_objectiveTexture);
-	_objectiveSprite.setScale(0.5f, 0.5f);
-	_objectiveSprite.setOrigin(_objectiveTexture.getSize().x / 2.0f, _objectiveTexture.getSize().y / 2.0f);
+	_objectiveSprite = Common::SetSprite(
+		_objectiveTexture,
+		0.5f, 0.5f,
+		_objectiveTexture.getSize().x / 2.0f, _objectiveTexture.getSize().y / 2.0f
+	);
+}
+
+bool Objective::CheckCollision(Vector2i position) {
+	FloatRect bounds = _objectiveSprite.getGlobalBounds();
+	bool check = bounds.contains(position.x, position.y);
+	return check;
 }
 
 bool Objective::IsInnocent(){
@@ -41,13 +49,13 @@ bool Objective::IsInnocent(){
 }
 
 void Objective::SetAsInnocent() {
-	_objectiveTexture.loadFromFile(Data::assetsPath[Innocent]);
+	_objectiveTexture.loadFromFile(Data::AssetsPath[Innocent]);
 	SetSprite();
 	_isInnocent = true;
 }
 
 void Objective::SetAsNoInnocent() {
-	_objectiveTexture.loadFromFile(Data::assetsPath[Enemy1]);
+	_objectiveTexture.loadFromFile(Data::AssetsPath[Enemy]);
 	SetSprite();
 	_isInnocent = false;
 }

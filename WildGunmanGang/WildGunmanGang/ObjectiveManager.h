@@ -20,6 +20,7 @@ class ObjectiveManager{
 		void ActivateRandomObjective();
 		void SetCurrentObjectiveInactive();
 		void DrawAll(RenderWindow& window);
+		Enum ObjectiveCollided(Vector2i position);
 
 };
 

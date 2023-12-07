@@ -7,7 +7,8 @@ Game::Game(int height, int width, string title)
 	_window->setFramerateLimit(60);
 	_window->setMouseCursorVisible(false);
 
-	_player = new Player();	
+	_player = new Player(Data::LivesAmount);
+	_points = 0;
 
 	SetScene();
 }
@@ -78,33 +79,60 @@ void Game::SetUI()
 
 void Game::SetScene()
 {
-	_backgroundTexture.loadFromFile(Data::assetsPath[Background]);
-	_backgroundSprite.setTexture(_backgroundTexture);
+	_backgroundTexture.loadFromFile(Data::AssetsPath[Background]);
 	float scaleX = _window->getSize().x / (float)_backgroundTexture.getSize().x;
 	float scaleY = _window->getSize().y / (float)_backgroundTexture.getSize().y;
 
-	_backgroundSprite.setScale(scaleX, scaleY);
+	_backgroundSprite = Common::SetSprite(
+		_backgroundTexture,
+		scaleX, scaleY
+	);
 
-	_topTexture.loadFromFile(Data::assetsPath[Top]);
-	_topSprite.setTexture(_topTexture);
+	_topTexture.loadFromFile(Data::AssetsPath[Top]);
 	scaleX = _window->getSize().x / (float)_topTexture.getSize().x;
 	scaleY = _window->getSize().y / (float)_topTexture.getSize().y;
+	
+	_topSprite = Common::SetSprite(
+		_topTexture,
+		scaleX, scaleY
+	);
 
-	_topSprite.setScale(scaleX, scaleY);
+	_openWindowTexture.loadFromFile(Data::AssetsPath[OpenWindow]);
+	_openWindowSprite = Common::SetSprite(
+		_openWindowTexture,
+		0.55f, 0.55f,
+		_openWindowTexture.getSize().x / 2.0f, _openWindowTexture.getSize().y / 2.0f
+	);
 
-	_openWindowTexture.loadFromFile(Data::assetsPath[OpenWindow]);
-	_openWindowSprite.setTexture(_openWindowTexture);
-	_openWindowSprite.setScale(0.55f, 0.55f);
-	_openWindowSprite.setOrigin(_openWindowTexture.getSize().x / 2.0f, _openWindowTexture.getSize().y / 2.0f);
-
-	_closedWindowTexture.loadFromFile(Data::assetsPath[ClosedWindow]);
-	_closedWindowSprite.setTexture(_closedWindowTexture);
-	_closedWindowSprite.setScale(0.55f, 0.55f);
-	_closedWindowSprite.setOrigin(_closedWindowTexture.getSize().x / 2.0f, _closedWindowTexture.getSize().y / 2.0f);
+	_closedWindowTexture.loadFromFile(Data::AssetsPath[ClosedWindow]);
+	_closedWindowSprite = Common::SetSprite(
+		_closedWindowTexture,
+		0.55f, 0.55f,
+		_closedWindowTexture.getSize().x / 2.0f, _closedWindowTexture.getSize().y / 2.0f
+	);
 }
 
 void Game::Shoot() {
-	cout<< "Position: ("<< Mouse::getPosition(*_window).x<<","<< Mouse::getPosition(*_window).y<<")" << endl;
+	
+
+	//Check collisions
+	Vector2i crossHairPosition = _player->GetPosition(*_window);
+
+	Enum objectiveShooted = _objectiveManager.ObjectiveCollided(crossHairPosition);
+
+	switch (objectiveShooted)
+	{
+		case None:
+			break;
+		case Innocent:			
+			_player->LooseLife();
+			break;
+		case Enemy:
+			_points++;			
+			//TODO: Update visual points
+			break;
+	}
+
 }
 
 void Game::ProcessCollisions()

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Data.h"
+#include "Common.h"
 
 class Objective{
 	
@@ -18,6 +19,8 @@ class Objective{
 		void Update();
 		void Draw(RenderWindow* window);
 		void SetSprite();
+
+		bool CheckCollision(Vector2i position);
 
 		bool IsInnocent();
 		void SetAsNoInnocent();

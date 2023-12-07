@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Objective.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -137,9 +138,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Position.cpp" />
-    <ClCompile Include="Positions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
     <ClInclude Include="Objective.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ObjectiveManager.h" />

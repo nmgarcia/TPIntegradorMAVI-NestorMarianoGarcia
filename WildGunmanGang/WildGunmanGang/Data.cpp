@@ -8,9 +8,9 @@ vector<Position> Data::ObjectivesPositions = {
 	Position(Vector2i(400, 450),false),
 };
 
-map<AssetsEnum,string> Data::assetsPath = {
+map<Enum,string> Data::AssetsPath = {
 	{Innocent,"Assets/innocent.png"},
-	{Enemy1,"Assets/enemy1.png"},
+	{Enemy,"Assets/enemy1.png"},
 	{Enemy2,"Assets/enemy2.png"},
 	{OpenWindow,"Assets/openWindow.png"},
 	{ClosedWindow,"Assets/closedWindow.png"},
@@ -18,5 +18,9 @@ map<AssetsEnum,string> Data::assetsPath = {
 	{Crosshair,"Assets/crosshair.png"},
 	{Background,"Assets/background.png"},
 };
+
+int Data::LivesAmount = 3;
+int Data::PointsToWin = 3;
+float Data::ObjectiveVisibleTime = 2.0f;
 
 		

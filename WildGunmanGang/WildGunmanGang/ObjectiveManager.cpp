@@ -13,8 +13,10 @@ ObjectiveManager::ObjectiveManager()
         _objectives.push_back(make_unique<Objective>(i));
     }
 
-    _visibleTime = 2.0f;
+    _visibleTime = Data::ObjectiveVisibleTime;
     _clock.restart();
+
+    ActivateRandomObjective();
 }
     
 int ObjectiveManager::GetCurrentVisibleIndex() {
@@ -62,12 +64,12 @@ void ObjectiveManager::SetInnocentOrEnemy() {
     //solution from: https://stackoverflow.com/a/43329456
     static auto randomNum = bind(uniform_int_distribution<>(0, 1), default_random_engine());
     
-
     if(randomNum())
         _objectives[_currentVisibleIndex]->SetAsNoInnocent();
     else
         _objectives[_currentVisibleIndex]->SetAsInnocent();
 }
+
 void ObjectiveManager::DrawAll(RenderWindow& window)
 {
     for (auto& objective : _objectives) {
@@ -75,6 +77,22 @@ void ObjectiveManager::DrawAll(RenderWindow& window)
             objective->Draw(&window);
         }
     }
+}
+
+Enum ObjectiveManager::ObjectiveCollided(Vector2i position)
+{
+    bool check = _objectives[_currentVisibleIndex]->CheckCollision(position);
+
+    if (check) {        
+        _objectives[_currentVisibleIndex]->SetInactive();
+        _clock.restart();
+        int indexObjectiveKilled = _currentVisibleIndex;
+        ActivateRandomObjective();
+
+        return _objectives[indexObjectiveKilled]->IsInnocent()? Innocent : Enemy;
+    
+    }
+    return None;
 }
 
 

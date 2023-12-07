@@ -4,6 +4,7 @@
 #include "Objective.h"
 #include "ObjectiveManager.h"
 #include "Data.h"
+#include "Common.h"
 
 class Game
 {
@@ -11,7 +12,7 @@ class Game
 	RenderWindow* _window;
 	Player* _player;
 	int _objectivesAmount;
-	Objective* _objectives;
+	int _points;
 	ObjectiveManager _objectiveManager;
 	Clock _clock;
 	float _visibleTime;

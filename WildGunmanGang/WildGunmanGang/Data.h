@@ -2,16 +2,17 @@
 #include "stdafx.h"
 #include "Position.h"
 
-enum AssetsEnum
+enum Enum
 {
-Innocent,
-Enemy1,
-Enemy2,
-OpenWindow,
-ClosedWindow,
-Top,
-Crosshair,
-Background
+	None,
+	Innocent,
+	Enemy,
+	Enemy2,
+	OpenWindow,
+	ClosedWindow,
+	Top,
+	Crosshair,
+	Background
 };
 
 /// <summary>
@@ -20,7 +21,11 @@ Background
 class Data
 {
 	public:
+		static int LivesAmount;
+		static int PointsToWin;
 		static vector<Position> ObjectivesPositions;
-		static map<AssetsEnum, string> assetsPath;
+		static map<Enum, string> AssetsPath;
+		static float ObjectiveVisibleTime;
+		
 };
 
