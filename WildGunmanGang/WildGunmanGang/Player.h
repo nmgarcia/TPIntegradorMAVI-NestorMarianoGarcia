@@ -13,6 +13,7 @@ class Player{
 		void SetPosition(int x, int y);
 		Vector2i GetPosition(RenderWindow& window);
 		void Draw(RenderWindow* window);
-		void LooseLife();
+		void LoseLife();
+		int GetLivesAmount();
 };
 

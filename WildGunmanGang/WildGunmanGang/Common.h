@@ -10,6 +10,7 @@ class Common
 		static Sprite SetSprite(Texture& texture);
 		static Sprite SetSprite(Texture& texture, float scaleX,float scaleY);
 		static Sprite SetSprite(Texture& texture, float scaleX,float scaleY, float originX, float originY);
+		static void LogMessage(string message);
 
 };
 

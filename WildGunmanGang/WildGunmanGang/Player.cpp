@@ -25,6 +25,10 @@ void Player::Draw(RenderWindow* window)
 	window->draw(_crossSprite);
 }
 
-void Player::LooseLife(){
+int Player::GetLivesAmount() {
+	return _livesAmount;
+}
+void Player::LoseLife(){
 	_livesAmount--;
+	Common::LogMessage("Lives Amount: "+_livesAmount);
 }

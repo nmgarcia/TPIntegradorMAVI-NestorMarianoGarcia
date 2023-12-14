@@ -14,8 +14,7 @@ ObjectiveManager::ObjectiveManager()
     }
 
     _visibleTime = Data::ObjectiveVisibleTime;
-    _clock.restart();
-
+    
     ActivateRandomObjective();
 }
     
@@ -36,29 +35,34 @@ void ObjectiveManager::ActivateRandomObjective()
         _currentVisibleIndex = randomNum;
 
     } while (randomNum == _currentVisibleIndex && _previousVisibleIndex ==_currentVisibleIndex);
-}
 
-void ObjectiveManager::SetCurrentObjectiveInactive() {
-    if(_currentVisibleIndex>=0)
-        _objectives[_currentVisibleIndex]->SetInactive();
+    SetInnocentOrEnemy();
+    
+    _clock.restart();
 }
 
 void ObjectiveManager::UpdateAll()
 {
     if (_clock.getElapsedTime().asSeconds()>_visibleTime) {
-        SetCurrentObjectiveInactive();
+        EnemyAttack();
+        
+        SetAllAsInactive();
         ActivateRandomObjective();
-        SetInnocentOrEnemy();
-        _clock.restart();
     }
 
-    for(auto& objective: _objectives)
+
+}
+
+void ObjectiveManager::SetAllAsInactive() {
+    int counter = 0;
+    for (auto& objective : _objectives)
     {
-        if (objective->IsActive()) {
-            objective->Update();
-        }
+        if (objective->IsActive())counter++;
+
+        objective->SetInactive();
     }
 }
+
 void ObjectiveManager::SetInnocentOrEnemy() {
     //Generate random boolean to determine if its innocent or enemy
     //solution from: https://stackoverflow.com/a/43329456
@@ -84,8 +88,8 @@ Enum ObjectiveManager::ObjectiveCollided(Vector2i position)
     bool check = _objectives[_currentVisibleIndex]->CheckCollision(position);
 
     if (check) {        
-        _objectives[_currentVisibleIndex]->SetInactive();
-        _clock.restart();
+        //_objectives[_currentVisibleIndex]->SetInactive();
+        SetAllAsInactive();
         int indexObjectiveKilled = _currentVisibleIndex;
         ActivateRandomObjective();
 
@@ -95,4 +99,20 @@ Enum ObjectiveManager::ObjectiveCollided(Vector2i position)
     return None;
 }
 
+void ObjectiveManager::EnemyAttack() {
+
+    if (!_objectives[_currentVisibleIndex]->IsInnocent() && !_isAttacking) {
+        _isAttacking = true;
+    }
+}
+
+bool ObjectiveManager::IsAttacking()
+{
+    return _isAttacking;
+}
+
+void ObjectiveManager::SetIsAttackingFalse()
+{
+    _isAttacking = false;
+}
 

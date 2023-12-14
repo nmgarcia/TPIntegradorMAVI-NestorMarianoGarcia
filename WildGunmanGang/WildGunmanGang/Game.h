@@ -5,6 +5,7 @@
 #include "ObjectiveManager.h"
 #include "Data.h"
 #include "Common.h"
+#include "TitleScreen.h"
 
 class Game
 {
@@ -14,8 +15,9 @@ class Game
 	int _objectivesAmount;
 	int _points;
 	ObjectiveManager _objectiveManager;
-	Clock _clock;
 	float _visibleTime;
+	TitleScreen* _titleScreen;
+	bool _gameStarted;
 
 	//Textures and sprites
 	Texture _backgroundTexture;
@@ -26,6 +28,10 @@ class Game
 	Sprite _openWindowSprite;
 	Texture _closedWindowTexture;
 	Sprite _closedWindowSprite;
+	Texture _enemyAttackTexture;
+	Sprite _enemyAttackSprite;
+	bool _drawEnemyAttack = false;
+	Clock _enemyAttackClock;
 
 	//Main structure
 	void ProcessEvents();
@@ -35,15 +41,16 @@ class Game
 	
 	//Aux functions
 	void SetUI();
-	void SetScene();
+	void SetSprites();
 	void Shoot();
+	void SetEnemyAttack();
 	
 	//Draw functions
 	void DrawObjectives();
 	void DrawWindows();
 
 	public:
-		Game(int height, int width, string title);
+		Game(int width, int height, string title);
 		void Go();		
 		~Game();
 };

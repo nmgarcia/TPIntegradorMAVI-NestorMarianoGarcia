@@ -23,3 +23,7 @@ Sprite Common::SetSprite(Texture& texture, float scaleX, float scaleY, float ori
 	sprite.setOrigin(originX, originY);
 	return sprite;
 }
+
+void Common::LogMessage(string message) {
+	cout << message << endl;
+}

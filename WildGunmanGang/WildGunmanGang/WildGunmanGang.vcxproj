@@ -138,6 +138,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="TitleScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

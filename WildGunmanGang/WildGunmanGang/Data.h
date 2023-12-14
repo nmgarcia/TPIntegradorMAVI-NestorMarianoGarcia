@@ -12,7 +12,9 @@ enum Enum
 	ClosedWindow,
 	Top,
 	Crosshair,
-	Background
+	Background,
+	EnemyAttack,
+	TitleScreenEnum
 };
 
 /// <summary>
