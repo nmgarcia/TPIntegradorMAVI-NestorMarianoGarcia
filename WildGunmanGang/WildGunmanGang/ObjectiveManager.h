@@ -18,10 +18,11 @@ class ObjectiveManager{
 		void UpdateAll();
 		void SetAllAsInactive();
 		void SetInnocentOrEnemy();
+		void RestartObjectiveManager();
 		int GetCurrentVisibleIndex();
 		void ActivateRandomObjective();
 		void DrawAll(RenderWindow& window);
-		Enum ObjectiveCollided(Vector2i position);
+		Enum GetObjectCollided(Vector2i position);
 		void EnemyAttack();
 		bool IsAttacking();
 		void SetIsAttackingFalse();

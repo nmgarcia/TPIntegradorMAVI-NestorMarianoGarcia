@@ -6,6 +6,7 @@
 #include "Data.h"
 #include "Common.h"
 #include "TitleScreen.h"
+#include "UIManager.h"
 
 class Game
 {
@@ -18,6 +19,8 @@ class Game
 	float _visibleTime;
 	TitleScreen* _titleScreen;
 	bool _gameStarted;
+	bool _gameOver = false;
+	UIManager _uiManager;
 
 	//Textures and sprites
 	Texture _backgroundTexture;
@@ -37,13 +40,14 @@ class Game
 	void ProcessEvents();
 	void UpdateGame();
 	void DrawGame();
-	void ProcessCollisions();
-	
+	void InitializeGame();
+
 	//Aux functions
 	void SetUI();
 	void SetSprites();
 	void Shoot();
 	void SetEnemyAttack();
+	void GameOver();
 	
 	//Draw functions
 	void DrawObjectives();

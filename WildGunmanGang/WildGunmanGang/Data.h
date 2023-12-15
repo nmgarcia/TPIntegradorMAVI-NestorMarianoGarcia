@@ -14,7 +14,8 @@ enum Enum
 	Crosshair,
 	Background,
 	EnemyAttack,
-	TitleScreenEnum
+	TitleScreenEnum,
+	FontEnum
 };
 
 /// <summary>
@@ -24,7 +25,6 @@ class Data
 {
 	public:
 		static int LivesAmount;
-		static int PointsToWin;
 		static vector<Position> ObjectivesPositions;
 		static map<Enum, string> AssetsPath;
 		static float ObjectiveVisibleTime;

@@ -6,11 +6,9 @@ Game::Game(int width, int height, string title)
 	_window = new RenderWindow(VideoMode(width, height + 200, 32), title);
 	_window->setFramerateLimit(60);
 	_window->setMouseCursorVisible(false);
+	_titleScreen = new TitleScreen(height, width);
+	InitializeGame();
 	
-	_player = new Player(Data::LivesAmount);
-	_titleScreen = new TitleScreen(height,width);
-	_points = 0;
-
 	SetSprites();
 }
 
@@ -20,7 +18,6 @@ void Game::Go()
 	while (_window->isOpen())
 	{
 		ProcessEvents();
-		ProcessCollisions();
 		UpdateGame();
 		
 		_window->clear();
@@ -40,10 +37,20 @@ void Game::ProcessEvents()
 				break;
 			case Event::MouseButtonPressed:
 				if (evt.mouseButton.button == Mouse::Button::Left) {
-					if (_gameStarted)
+					
+					if (_gameStarted) {
 						Shoot();
-					else
+
+						if (_gameOver)
+							_gameStarted = false;
+					}
+					else {
+						InitializeGame();
+
 						_gameStarted = true;
+						_gameOver = false;
+					}
+						
 				}
 				break;
 		}
@@ -57,13 +64,25 @@ void Game::UpdateGame()
 	_player->SetPosition(mousePosition.x, mousePosition.y);
 	
 	//Attack of enemy
-	if (_objectiveManager.IsAttacking()) {
+	if (_objectiveManager.IsAttacking() && _gameStarted) {
 		_player->LoseLife();
 		_objectiveManager.SetIsAttackingFalse();
 		SetEnemyAttack();
 	}
 
-	_objectiveManager.UpdateAll();
+	//Check if game is over
+	if (_player->GetLivesAmount() <= 0){		
+		GameOver();
+	}
+
+	if(_gameStarted && !_gameOver) {
+		_objectiveManager.UpdateAll();
+	}
+	else {
+		
+		_objectiveManager.SetAllAsInactive();
+	}
+	
 }
 
 void Game::DrawGame()
@@ -88,8 +107,7 @@ void Game::DrawGame()
 		_window->draw(_topSprite);
 
 		//4: UI
-
-		
+		_uiManager.Draw(_window, _points, _player->GetLivesAmount(),_gameOver);
 
 		//5: Enemy attack
 		if (_drawEnemyAttack) {
@@ -100,12 +118,8 @@ void Game::DrawGame()
 		}
 	}
 
-	//Player
+	//Draw Player
 	_player->Draw(_window);
-}
-
-void Game::SetUI()
-{
 }
 
 void Game::SetSprites()
@@ -152,11 +166,10 @@ void Game::SetSprites()
 
 void Game::Shoot() {
 	
-	Common::LogMessage("comienza disparo");
 	//Check collisions
 	Vector2i crossHairPosition = _player->GetPosition(*_window);
 
-	Enum objectiveShooted = _objectiveManager.ObjectiveCollided(crossHairPosition);
+	Enum objectiveShooted = _objectiveManager.GetObjectCollided(crossHairPosition);
 
 	switch (objectiveShooted)
 	{
@@ -167,15 +180,8 @@ void Game::Shoot() {
 			break;
 		case Enemy:
 			_points++;			
-			//TODO: Update visual points
 			break;
 	}
-
-	Common::LogMessage("Termina disparo");
-}
-
-void Game::ProcessCollisions()
-{
 }
 
 void Game::DrawObjectives() {	
@@ -206,7 +212,6 @@ void Game::DrawWindows() {
 
 void Game::SetEnemyAttack() {
 
-	Common::LogMessage("Danio recibido");	
 	_drawEnemyAttack = true;
 	
 	FloatRect max = _enemyAttackSprite.getGlobalBounds();
@@ -216,6 +221,17 @@ void Game::SetEnemyAttack() {
 	_enemyAttackSprite.setPosition(random.x, random.y);
 	_enemyAttackClock.restart();
 
+}
+
+void Game::GameOver() {
+	
+	_gameOver = true;
+}
+
+void Game::InitializeGame() {
+	_player = new Player(Data::LivesAmount);	
+	_points = 0;
+	_objectiveManager.RestartObjectiveManager();
 }
 
 Game::~Game()

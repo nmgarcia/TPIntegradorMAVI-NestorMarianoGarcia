@@ -17,7 +17,10 @@ ObjectiveManager::ObjectiveManager()
     
     ActivateRandomObjective();
 }
-    
+   
+void ObjectiveManager::RestartObjectiveManager() {
+    ActivateRandomObjective();
+}
 int ObjectiveManager::GetCurrentVisibleIndex() {
     return _currentVisibleIndex;
 }
@@ -28,7 +31,6 @@ void ObjectiveManager::ActivateRandomObjective()
     int max = _objectivesAmount - 1;
 
     do {
-        //TODO: try to set randomly an array between 1 and 2 with random elements to activate
         randomNum = rand() % (max - 0 + 1);
         _objectives[randomNum]->SetActive();
         _previousVisibleIndex = _currentVisibleIndex;
@@ -44,13 +46,10 @@ void ObjectiveManager::ActivateRandomObjective()
 void ObjectiveManager::UpdateAll()
 {
     if (_clock.getElapsedTime().asSeconds()>_visibleTime) {
-        EnemyAttack();
-        
+        EnemyAttack();        
         SetAllAsInactive();
         ActivateRandomObjective();
     }
-
-
 }
 
 void ObjectiveManager::SetAllAsInactive() {
@@ -83,12 +82,12 @@ void ObjectiveManager::DrawAll(RenderWindow& window)
     }
 }
 
-Enum ObjectiveManager::ObjectiveCollided(Vector2i position)
+Enum ObjectiveManager::GetObjectCollided(Vector2i position)
 {
     bool check = _objectives[_currentVisibleIndex]->CheckCollision(position);
 
-    if (check) {        
-        //_objectives[_currentVisibleIndex]->SetInactive();
+    if (check) {
+
         SetAllAsInactive();
         int indexObjectiveKilled = _currentVisibleIndex;
         ActivateRandomObjective();

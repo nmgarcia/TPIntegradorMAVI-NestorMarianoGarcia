@@ -30,5 +30,4 @@ int Player::GetLivesAmount() {
 }
 void Player::LoseLife(){
 	_livesAmount--;
-	Common::LogMessage("Lives Amount: "+_livesAmount);
 }

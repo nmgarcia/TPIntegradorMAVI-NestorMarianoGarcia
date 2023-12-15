@@ -19,10 +19,10 @@ map<Enum,string> Data::AssetsPath = {
 	{ Background, "Assets/background.png"},
 	{ EnemyAttack, "Assets/shoot.png"},
 	{ TitleScreenEnum, "Assets/titleScreen.png"},
+	{ FontEnum, "Assets/STENCIL.ttf"},
 };
 
 int Data::LivesAmount = 3;
-int Data::PointsToWin = 3;
 float Data::ObjectiveVisibleTime = 2.0f;
 
 		
